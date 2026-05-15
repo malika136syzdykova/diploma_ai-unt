@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useUser } from '../context/UserContext'
 import { useNavigate } from 'react-router-dom'
+import { apiFetch } from '../api'
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Onest:wght@300;400;500;600&display=swap');
@@ -377,7 +378,7 @@ export default function Test() {
       const params = new URLSearchParams({ user_id: String(userId), subject: subj })
       const ex = askedIdsRef.current
       if (ex.length > 0) params.set('exclude_ids', ex.join(','))
-      const res = await fetch(`/api/questions?${params.toString()}`)
+      const res = await apiFetch(`/api/questions?${params.toString()}`)
       const data = await res.json()
       if (data.length > 0) {
         const q = data[0]
@@ -419,7 +420,7 @@ export default function Test() {
     if (!selectedAnswer || !question) return
     setSubmitting(true)
     try {
-      const res = await fetch('/api/answer', {
+      const res = await apiFetch('/api/answer', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: userId, question_id: question.id, user_answer: selectedAnswer }),
       })
@@ -451,7 +452,7 @@ export default function Test() {
     if (!question) return
     setAiFeedback(''); setAiFeedbackError(''); setAiFeedbackLoading(true)
     try {
-      const res = await fetch('/api/ai-feedback', {
+      const res = await apiFetch('/api/ai-feedback', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: question.question_text, correct_answer: r.correct_answer, user_answer: selectedAnswer, explanation: r.explanation || '' }),
       })
@@ -474,7 +475,7 @@ export default function Test() {
     setChatMessages(p => [...p, { role: 'user', text: t }])
     setChatInput(''); setChatError(''); setChatLoading(true)
     try {
-      const res = await fetch('/api/ai-chat', {
+      const res = await apiFetch('/api/ai-chat', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: t, context: { question: question?.question_text || '', correct_answer: result.correct_answer, user_answer: selectedAnswer } }),
       })

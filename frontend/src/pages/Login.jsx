@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
+import { apiFetch } from '../api'
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -17,9 +18,9 @@ function Login() {
     setLoading(true)
 
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await apiFetch('/api/auth/login', {
         method: 'POST',
-        headers: {
+          headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({

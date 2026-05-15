@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useUser } from '../context/UserContext'
 import { useNavigate } from 'react-router-dom'
+import { apiFetch } from '../api'
 
 function Progress() {
   const { userId, authLoading } = useUser()
@@ -29,7 +30,7 @@ function Progress() {
   const fetchProgress = async () => {
     setLoading(true)
     try {
-      const res = await fetch(`/api/progress/${userId}`)
+      const res = await apiFetch(`/api/progress/${userId}`)
       const data = await res.json()
       setProgress(data)
       await fetchPredictionsBySubject()
@@ -42,7 +43,7 @@ function Progress() {
     const entries = await Promise.all(
       subjects.map(async (subject) => {
         try {
-          const res = await fetch(`/api/prediction/${userId}?subject=${encodeURIComponent(subject)}`)
+          const res = await apiFetch(`/api/prediction/${userId}?subject=${encodeURIComponent(subject)}`)
           const data = await res.json()
           return [subject, data]
         } catch {
