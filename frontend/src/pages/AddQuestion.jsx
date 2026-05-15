@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
+import { apiFetch } from '../api'
 
 const SUBJECTS = [
   'Математическая грамотность',
@@ -45,10 +46,9 @@ export default function AddQuestion() {
     }
     setLoading(true)
     try {
-      const res = await fetch('/api/questions', {
+      const res = await apiFetch('/api/questions', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({

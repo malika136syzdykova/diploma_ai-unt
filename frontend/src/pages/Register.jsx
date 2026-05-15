@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
+import { apiFetch } from '../api'
 
 function Register() {
   const [name, setName] = useState('')
@@ -17,7 +18,7 @@ function Register() {
     setLoading(true)
 
     try {
-      const response = await fetch('/api/auth/register', {
+      const response = await apiFetch('/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { apiFetch } from '../api'
 
 const UserContext = createContext()
 
@@ -10,7 +11,7 @@ export function UserProvider({ children }) {
   const fetchMe = useCallback(async () => {
     if (!token) return null
 
-    const response = await fetch('/api/auth/me', {
+    const response = await apiFetch('/api/auth/me', {
       headers: {
         Authorization: `Bearer ${token}`,
       },

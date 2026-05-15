@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
+import { apiFetch } from '../api'
 
 function Profile() {
   const { token, authLoading } = useUser()
@@ -22,7 +23,7 @@ function Profile() {
       setLoading(true)
       setError('')
       try {
-        const response = await fetch('/api/profile', {
+        const response = await apiFetch('/api/profile', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -51,7 +52,7 @@ function Profile() {
     setError('')
 
     try {
-      const response = await fetch('/api/profile', {
+      const response = await apiFetch('/api/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useUser } from '../context/UserContext'
 import { useNavigate } from 'react-router-dom'
+import { apiFetch } from '../api'
 
 function Prediction() {
   const { userId, userName, authLoading } = useUser()
@@ -16,7 +17,7 @@ function Prediction() {
     setLoading(true)
     setError('')
     try {
-      const response = await fetch(
+      const response = await apiFetch(
         `/api/prediction/${userId}?subject=${encodeURIComponent(subjectName)}`
       )
       if (!response.ok) {
@@ -203,6 +204,3 @@ function Prediction() {
 }
 
 export default Prediction
-
-
-
