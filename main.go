@@ -20,8 +20,8 @@ func main() {
 	// CORS — разрешаем фронтенду обращаться к бэкенду
 	r.Use(cors.New(cors.Config{
 		AllowOrigins: []string{
-			"http://localhost:5173",                 // локальная разработка
-			"https://diploma-frontend.onrender.com", // замени на свой URL фронтенда
+			"http://localhost:5173",
+			"https://diploma-frontend-jb2r.onrender.com",
 		},
 		AllowMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders: []string{"Content-Type", "Authorization"},
