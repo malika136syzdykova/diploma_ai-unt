@@ -120,12 +120,7 @@ function Login() {
           <div className="h-px flex-1 bg-slate-200" />
         </div>
 
-        <button
-          type="button"
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-xl font-medium text-slate-700 transition hover:bg-slate-50"
-        >
-          Войти через Google
-        </button>
+       
 
         <div className="mt-6 text-center">
           <p className="text-base text-slate-600">
